@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresa - Sistema de Funcionários</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Empresa Guilherme Henrique Batista Silva</h1>
+        <h2>Sistema de Funcionários</h2>
+    </header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#" id="cadastrar-btn">Cadastrar Funcionário</a></li>
+                <li><a href="#" id="consultar-btn">Consultar Funcionários</a></li>
+                <li><a href="#" id="remover-btn">Remover Funcionário</a></li>
+                <li><a href="#" id="sair-btn" class="sair">Sair</a></li>
+            </ul>
+        </nav>
+        <main id="main-content">
+            <!-- Formulário Cadastrar -->
+            <section id="form-cadastrar" class="form-section">
+                <h2>Cadastrar Funcionário</h2>
+                <form action="#">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required><br><br>
+                    <label for="setor">Setor:</label>
+                    <input type="text" id="setor" name="setor" required><br><br>
+                    <label for="salario">Salário:</label>
+                    <input type="number" id="salario" name="salario" step="0.01" required><br><br>
+                    <button type="submit">Cadastrar</button>
+                </form>
+            </section>
+
+            <!-- Formulário Consultar -->
+            <section id="form-consultar" class="form-section" style="display:none;">
+                <h2>Consultar Funcionários</h2>
+                <form action="#">
+                    <label for="consulta-tipo">Tipo de Consulta:</label>
+                    <select id="consulta-tipo" name="consulta-tipo">
+                        <option value="">Selecione</option>
+                        <option value="id">Por ID</option>
+                        <option value="nome">Por Nome</option>
+                        <option value="setor">Por Setor</option>
+                    </select><br><br>
+                    
+                    <div id="campo-consulta-id" class="campo-consulta" style="display:none;">
+                        <label for="consulta-id">ID:</label>
+                        <input type="number" id="consulta-id" name="consulta-id">
+                    </div>
+                    
+                    <div id="campo-consulta-nome" class="campo-consulta" style="display:none;">
+                        <label for="consulta-nome">Nome:</label>
+                        <input type="text" id="consulta-nome" name="consulta-nome">
+                    </div>
+                    
+                    <div id="campo-consulta-setor" class="campo-consulta" style="display:none;">
+                        <label for="consulta-setor">Setor:</label>
+                        <input type="text" id="consulta-setor" name="consulta-setor">
+                    </div>
+                    
+                    <button type="submit">Consultar</button>
+                </form>
+            </section>
+
+            <!-- Formulário Remover -->
+            <section id="form-remover" class="form-section" style="display:none;">
+                <h2>Remover Funcionário</h2>
+                <form action="#">
+                    <label for="remover-id">Digite o ID do funcionário a ser removido:</label>
+                    <input type="number" id="remover-id" name="remover-id"><br><br>
+                    <button type="submit">Remover</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.getElementById('cadastrar-btn').addEventListener('click', function() {
+            document.getElementById('form-cadastrar').style.display = 'block';
+            document.getElementById('form-consultar').style.display = 'none';
+            document.getElementById('form-remover').style.display = 'none';
+        });
+
+        document.getElementById('consultar-btn').addEventListener('click', function() {
+            document.getElementById('form-cadastrar').style.display = 'none';
+            document.getElementById('form-consultar').style.display = 'block';
+            document.getElementById('form-remover').style.display = 'none';
+        });
+
+        document.getElementById('remover-btn').addEventListener('click', function() {
+            document.getElementById('form-cadastrar').style.display = 'none';
+            document.getElementById('form-consultar').style.display = 'none';
+            document.getElementById('form-remover').style.display = 'block';
+        });
+
+        document.getElementById('sair-btn').addEventListener('click', function() {
+            alert('Saindo...');
+        });
+
+        // Mostrar campos com base na seleção
+        document.getElementById('consulta-tipo').addEventListener('change', function() {
+            var tipo = this.value;
+            document.querySelectorAll('.campo-consulta').forEach(function(el) {
+                el.style.display = 'none';
+            });
+            if (tipo) {
+                document.getElementById('campo-consulta-' + tipo).style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
